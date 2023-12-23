@@ -1,3 +1,4 @@
+// Screen2.dart
 import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
@@ -48,30 +49,69 @@ class _Screen2State extends State<Screen2> {
     return Scaffold(
       appBar: AppBar(
         title: Text('User List Screen'),
+        backgroundColor: Colors.blue,
       ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          // Display the list of users
-          // TODO: Implement the UI to display the user list
-          ElevatedButton(
-            onPressed: _getMoreUsers,
-            child: Text('Get More Users'),
-          ),
-          ElevatedButton(
-            onPressed: _storeDataLocally,
-            child: Text('Store Data Locally'),
-          ),
-          ElevatedButton(
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (_) => Screen3()),
-              );
-            },
-            child: Text('Go to Screen3'),
-          ),
-        ],
+      body: Container(
+        padding: EdgeInsets.all(16.0),
+        color: Colors.grey[200],
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Expanded(
+              child: Card(
+                elevation: 4.0,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12.0),
+                ),
+                child: userList.isEmpty
+                    ? Center(
+                        child: CircularProgressIndicator(),
+                      )
+                    : ListView.builder(
+                        itemCount: userList.length,
+                        itemBuilder: (context, index) {
+                          return ListTile(
+                            title: Text(userList[index].name),
+                            subtitle: Text(userList[index].email),
+                          );
+                        },
+                      ),
+              ),
+            ),
+            SizedBox(height: 16.0),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                ElevatedButton(
+                  onPressed: _getMoreUsers,
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.orange,
+                  ),
+                  child: Text('Get More Users'),
+                ),
+                ElevatedButton(
+                  onPressed: _storeDataLocally,
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.green,
+                  ),
+                  child: Text('Store Data Locally'),
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (_) => Screen3()),
+                    );
+                  },
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.blue,
+                  ),
+                  child: Text('Go to Screen3'),
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
