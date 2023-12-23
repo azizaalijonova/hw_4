@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'user.dart'; // Import your user model
-import 'database_helper.dart'; // Import your database helper
+import 'user.dart';
+import 'database_helper.dart';
 
 class Screen3 extends StatefulWidget {
   @override
@@ -18,7 +18,6 @@ class _Screen3State extends State<Screen3> {
   }
 
   Future<void> readDataFromDatabase() async {
-    // Read data from the SQLite database
     final users = await dbHelper.getUsers();
     setState(() {
       userList = users;
@@ -33,10 +32,7 @@ class _Screen3State extends State<Screen3> {
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          // Display the list of users from the local database
-          // TODO: Implement the UI to display the local user list
-        ],
+        children: [],
       ),
     );
   }

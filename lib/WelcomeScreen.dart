@@ -19,13 +19,8 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
     bool firstLaunch = prefs.getBool('firstLaunch') ?? true;
 
     if (firstLaunch) {
-      // Show tutorial/welcome screen
-      // TODO: Implement your tutorial/welcome screen logic here
-
-      // Mark as not the first launch
       prefs.setBool('firstLaunch', false);
     } else {
-      // Navigate to the next screen (Screen2)
       Navigator.pushReplacementNamed(context, '/screen2');
     }
   }

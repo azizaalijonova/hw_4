@@ -2,8 +2,8 @@
 import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'user.dart'; // Import your user model
-import 'database_helper.dart'; // Import your database helper
+import 'user.dart';
+import 'database_helper.dart';
 import 'Screen3.dart';
 
 class Screen2 extends StatefulWidget {
@@ -22,10 +22,8 @@ class _Screen2State extends State<Screen2> {
   }
 
   Future<void> fetchUserData() async {
-    final response = await http.get(Uri.parse(
-        'https://api.example.com/users')); // Replace with your API endpoint
+    final response = await http.get(Uri.parse('https://api.example.com/users'));
     if (response.statusCode == 200) {
-      // Parse the response and update the userList
       setState(() {
         userList = List<User>.from(
             json.decode(response.body).map((data) => User.fromJson(data)));
@@ -33,12 +31,9 @@ class _Screen2State extends State<Screen2> {
     }
   }
 
-  void _getMoreUsers() {
-    // TODO: Implement logic to fetch more users from API
-  }
+  void _getMoreUsers() {}
 
   void _storeDataLocally() async {
-    // Store selected data into SQLite database
     await dbHelper.insertUsers(userList);
     ScaffoldMessenger.of(context)
         .showSnackBar(SnackBar(content: Text('Data stored locally')));
